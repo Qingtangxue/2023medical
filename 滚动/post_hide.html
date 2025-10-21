@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帖子隐藏功能演示</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+        
+        .post {
+            background-color: #77dd11;
+            padding: 20px;
+            margin-bottom: 0;
+            border-bottom: 2px solid white;
+            position: relative;
+            animation-name: hide;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+            animation-play-state: paused;
+        }
+        
+
+        
+        .hide {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: auto;
+        }
+        
+        .hide:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* 隐藏动画定义 */
+        @keyframes hide {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+                display: none;
+            }
+        }
+        
+        #posts {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="posts"></div>
+
+    <script>
+        // 使用事件委托处理隐藏按钮点击
+        document.addEventListener('click', event => {
+            // 找到被点击的元素
+            const element = event.target;
+            
+            // 检查用户是否点击了隐藏按钮
+            if (element.className === 'hide') {
+                element.parentElement.style.animationPlayState = 'running';
+                element.parentElement.addEventListener('animationend', () => {
+                    element.parentElement.remove();
+                });
+            }
+        });
+        
+        // 添加一些示例帖子
+        window.onload = function() {
+            // 创建5个示例帖子
+            for (let i = 1; i <= 5; i++) {
+                const post = document.createElement('div');
+                post.className = 'post';
+                post.style.display = 'flex';
+                post.style.alignItems = 'center';
+                post.innerHTML = `
+                    <span>Post #${i}</span>
+                    <button class="hide">Hide</button>
+                `;
+                document.querySelector('#posts').appendChild(post);
+            }
+        };
+    </script>
+</body>
+</html>
