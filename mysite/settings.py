@@ -10,11 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-import sys
 from pathlib import Path
-
-# 添加项目根目录到Python路径
-sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app_20221201016',
-    'singlepage_app',
 ]
 
 MIDDLEWARE = [
